@@ -107,6 +107,20 @@
         div {
             margin-bottom: 10px;
         }
+
+        /* Estilo para o botão de impressão */
+        #btn-imprimir {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #btn-imprimir:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +134,9 @@
         <input type="text" id="lote" placeholder="Digite o lote">
     </div>
     <button onclick="buscar()">Buscar</button>
+
+    <!-- Botão de impressão -->
+    <button id="btn-imprimir" onclick="imprimir()">Imprimir Relatório</button>
 
     <div id="resultado">
         <h2>Resultado:</h2>
@@ -139,5 +156,75 @@
             </table>
         </div>
     </div>
+
+    <script>
+        // Função de busca (mantida para fins de exibição da tabela)
+        function buscar() {
+            const produto = document.getElementById('produto').value;
+            const lote = document.getElementById('lote').value;
+            const resultadoTabela = document.getElementById('tabela-resultados').getElementsByTagName('tbody')[0];
+
+            // Limpar resultados antes de adicionar novos
+            resultadoTabela.innerHTML = '';
+
+            // Aqui você pode adicionar sua lógica para buscar os dados no CSV e preencher a tabela
+            // Por exemplo, simulação de dados para fins de demonstração:
+            const dados = [
+                ['Produto A', 'Lote123', '01/01/2024', 'MP001', 'Descrição do Produto A', 'Fornecedor X'],
+                ['Produto B', 'Lote456', '02/02/2024', 'MP002', 'Descrição do Produto B', 'Fornecedor Y']
+            ];
+
+            dados.forEach(item => {
+                const tr = document.createElement('tr');
+                item.forEach(celula => {
+                    const td = document.createElement('td');
+                    td.textContent = celula;
+                    tr.appendChild(td);
+                });
+                resultadoTabela.appendChild(tr);
+            });
+        }
+
+        // Função de impressão
+        function imprimir() {
+            const conteudo = document.getElementById('resultado').innerHTML;
+
+            // Data e hora de impressão
+            const dataImpressao = new Date();
+            const dataFormatada = dataImpressao.toLocaleString();
+
+            // Gerar HTML para impressão
+            const conteudoImpressao = `
+                <div style="text-align: center; font-size: 20px;">
+                    <h2>Relatório de Rastreabilidade</h2>
+                    <p>Data da Impressão: ${dataFormatada}</p>
+                </div>
+                <table style="width: 100%; border: 1px solid #ddd; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: rgb(9, 41, 82); color: white;">
+                            <th>Produto</th>
+                            <th>Lote Produto Acabado</th>
+                            <th>Data de Fabricação</th>
+                            <th>Lote Matéria Prima</th>
+                            <th>Descrição do Produto</th>
+                            <th>Fornecedor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${conteudo}
+                    </tbody>
+                </table>
+            `;
+
+            // Abrir a janela de impressão
+            const janelaImpressao = window.open('', '', 'height=600,width=800');
+            janelaImpressao.document.write('<html><head><title>Imprimir Relatório</title>');
+            janelaImpressao.document.write('</head><body>');
+            janelaImpressao.document.write(conteudoImpressao);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
 </body>
 </html>

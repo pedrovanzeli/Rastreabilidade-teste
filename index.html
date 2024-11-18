@@ -24,15 +24,11 @@
         #resultado {
             margin: 20px auto;
             max-width: 90%;
-            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: black;
         }
 
         th, td {
@@ -75,6 +71,14 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        /* Adicionando rolagem à tabela */
+        #tabela-resultados-container {
+            max-height: 300px; /* Defina a altura desejada */
+            overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+        }
     </style>
 </head>
 <body>
@@ -91,19 +95,21 @@
 
     <div id="resultado">
         <h2>Resultado:</h2>
-        <table id="tabela-resultados">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Lote Produto Acabado</th>
-                    <th>Data de Fabricação</th>
-                    <th>Lote Matéria Prima</th>
-                    <th>Descrição do Produto</th>
-                    <th>Fornecedor</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div id="tabela-resultados-container">
+            <table id="tabela-resultados">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Lote Produto Acabado</th>
+                        <th>Data de Fabricação</th>
+                        <th>Lote Matéria Prima</th>
+                        <th>Descrição do Produto</th>
+                        <th>Fornecedor</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

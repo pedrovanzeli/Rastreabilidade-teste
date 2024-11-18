@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreabilidade</title>
+    <script src="rastreabilidade.js" defer></script>
+</head>
+<body>
+    <h1>Rastreabilidade de Produto</h1>
+    <div>
+        <label for="produto">Produto:</label>
+        <input type="text" id="produto" placeholder="Digite o nome do produto">
+    </div>
+    <div>
+        <label for="lote">Lote:</label>
+        <input type="text" id="lote" placeholder="Digite o lote">
+    </div>
+    <button onclick="buscar()">Buscar</button>
+
+    <div id="resultado">
+        <h2>Resultado:</h2>
+        <table id="tabela-resultados">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Lote Produto Acabado</th>
+                    <th>Data de Fabricação</th>
+                    <th>Lote Matéria Prima</th>
+                    <th>Descrição do Produto</th>
+                    <th>Fornecedor</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+</html>

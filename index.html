@@ -121,6 +121,25 @@
         #btn-imprimir:hover {
             background-color: #218838;
         }
+
+        /* Regras de impressão */
+        @media print {
+            /* Ocultar cabeçalho na primeira página */
+            thead:first-of-type {
+                display: none;
+            }
+
+            /* Exibir cabeçalho nas páginas subsequentes */
+            thead {
+                display: table-header-group;
+            }
+
+            /* Limitar a impressão do conteúdo (remover margens e espaçamento desnecessário) */
+            body {
+                padding: 0;
+                margin: 0;
+            }
+        }
     </style>
 </head>
 <body>

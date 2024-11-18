@@ -1,6 +1,15 @@
 // URL do CSV hospedado no GitHub
 const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3GUBuIcZh7B5qmug0DRn0g7wwSDF1gHaR0CIvQC7qEnj7l7OTwPemZs7W55sET1hJbMBeLY1bqTHu/pub?gid=1516013078&single=true&output=csv';
 
+// Função para formatar a data (exibindo apenas a data, sem a hora)
+function formatarData(data) {
+    const dataFormatada = new Date(data);
+    const dia = String(dataFormatada.getDate()).padStart(2, '0');
+    const mes = String(dataFormatada.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
+    const ano = dataFormatada.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
+
 function carregarDados() {
     fetch(csvUrl)
         .then(response => response.text())
@@ -15,7 +24,7 @@ function carregarDados() {
                     resultados.push({
                         produto: colunas[0],
                         loteProdutoAcabado: colunas[1],
-                        dataFabricacao: colunas[2],
+                        dataFabricacao: formatarData(colunas[2]), // Formata a data
                         loteMateriaPrima: colunas[3],
                         descricaoProduto: colunas[4],
                         fornecedor: colunas[5],
@@ -70,7 +79,7 @@ function buscar() {
                         resultados.push({
                             produto: colunas[0],
                             loteProdutoAcabado: colunas[1],
-                            dataFabricacao: colunas[2],
+                            dataFabricacao: formatarData(colunas[2]), // Formata a data
                             loteMateriaPrima: colunas[3],
                             descricaoProduto: colunas[4],
                             fornecedor: colunas[5],

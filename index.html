@@ -125,19 +125,22 @@
         /* Regras de impressão */
         @media print {
             /* Ocultar cabeçalho na primeira página */
-            thead:first-of-type {
-                display: none;
-            }
-
-            /* Exibir cabeçalho nas páginas subsequentes */
             thead {
                 display: table-header-group;
             }
 
-            /* Limitar a impressão do conteúdo (remover margens e espaçamento desnecessário) */
-            body {
-                padding: 0;
-                margin: 0;
+            /* Quebra de página antes do cabeçalho nas páginas subsequentes */
+            thead {
+                display: table-header-group;
+            }
+
+            tr:first-child th {
+                display: none; /* Esconde o cabeçalho da primeira página */
+            }
+
+            /* A cada nova página, o cabeçalho aparecerá novamente */
+            tr:nth-child(n+2) th {
+                display: table-header-group; /* Exibe o cabeçalho nas páginas subsequentes */
             }
         }
     </style>

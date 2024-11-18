@@ -6,14 +6,15 @@
     <title>Rastreabilidade</title>
     <script src="rastreabilidade.js" defer></script>
     <style>
+        /* Estilo para a página com a imagem de fundo */
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('Site%20Holambra.jpg');
+            background-image: url('Site Holambra.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: white;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         h1 {
@@ -21,55 +22,40 @@
             margin-top: 20px;
         }
 
-        #resultado {
-            margin: 20px auto;
-            max-width: 90%;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: black;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tbody tr:hover {
-            background-color: #ddd;
+        div {
+            margin: 10px auto;
+            text-align: center;
         }
 
         label, input, button {
-            display: block;
-            margin: 10px auto;
-            max-width: 300px;
+            font-size: 1.2em;
+        }
+
+        table {
+            margin: 20px auto;
+            width: 90%;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+        }
+
+        table th, table td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         button {
+            padding: 10px 20px;
+            border: none;
             background-color: #007bff;
             color: white;
-            border: none;
-            padding: 10px;
             cursor: pointer;
-            font-size: 16px;
+            border-radius: 5px;
         }
 
         button:hover {

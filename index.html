@@ -187,31 +187,17 @@
 
         // Função de impressão
         function imprimir() {
-            const conteudo = document.getElementById('resultado').innerHTML;
-
-            // Data e hora de impressão
-            const dataImpressao = new Date();
-            const dataFormatada = dataImpressao.toLocaleString();
-
-            // Gerar HTML para impressão
-            const conteudoImpressao = `
+            const conteudoTabela = document.getElementById('tabela-resultados').innerHTML; // Pega apenas a tabela
+            const conteudoCabecalho = document.getElementById('tabela-resultados').getElementsByTagName('thead')[0].outerHTML; // Pega apenas o cabeçalho da tabela
+            const conteudo = `
                 <div style="text-align: center; font-size: 20px;">
                     <h2>Relatório de Rastreabilidade</h2>
-                    <p>Data da Impressão: ${dataFormatada}</p>
+                    <p>Data da Impressão: ${new Date().toLocaleString()}</p>
                 </div>
                 <table style="width: 100%; border: 1px solid #ddd; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background-color: rgb(9, 41, 82); color: white;">
-                            <th>Produto</th>
-                            <th>Lote Produto Acabado</th>
-                            <th>Data de Fabricação</th>
-                            <th>Lote Matéria Prima</th>
-                            <th>Descrição do Produto</th>
-                            <th>Fornecedor</th>
-                        </tr>
-                    </thead>
+                    ${conteudoCabecalho}
                     <tbody>
-                        ${conteudo}
+                        ${conteudoTabela}
                     </tbody>
                 </table>
             `;
@@ -220,7 +206,7 @@
             const janelaImpressao = window.open('', '', 'height=600,width=800');
             janelaImpressao.document.write('<html><head><title>Imprimir Relatório</title>');
             janelaImpressao.document.write('</head><body>');
-            janelaImpressao.document.write(conteudoImpressao);
+            janelaImpressao.document.write(conteudo);
             janelaImpressao.document.write('</body></html>');
             janelaImpressao.document.close();
             janelaImpressao.print();

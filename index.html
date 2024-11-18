@@ -37,14 +37,16 @@
             text-align: left;
         }
 
+        /* Cabeçalho da Tabela */
         th {
-            background-color: #007bff;
-            color: white;
+            background-color: rgb(9, 41, 82); /* Cor de fundo do cabeçalho */
+            color: white; /* Cor da fonte do cabeçalho */
             position: sticky;
             top: 0;
             z-index: 1;
         }
 
+        /* Corpo da Tabela */
         tbody tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -53,9 +55,11 @@
             background-color: #ddd;
         }
 
+        /* Estilo para os campos de busca */
         label, input, button {
             display: block;
             margin: 10px auto;
+            text-align: center;
             max-width: 300px;
         }
 
@@ -78,6 +82,30 @@
             overflow-y: auto; /* Adiciona a barra de rolagem vertical */
             background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid #ddd;
+        }
+
+        /* Estilo para as células dos resultados */
+        td {
+            background-color: white;
+            color: black; /* Cor da fonte dos dados da tabela */
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        /* Adicionando espaçamento entre campos */
+        div {
+            margin-bottom: 10px;
         }
     </style>
 </head>

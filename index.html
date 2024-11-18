@@ -6,27 +6,44 @@
     <title>Rastreabilidade</title>
     <script src="rastreabilidade.js" defer></script>
     <style>
+        /* Estilo para a página */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('Site%20Holambra.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #f4f4f4;
+            padding: 20px;
         }
 
         h1 {
             text-align: center;
-            margin-top: 20px;
+            color: rgb(9, 41, 82);
+        }
+
+        label {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: rgb(9, 41, 82);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(6, 28, 55);
         }
 
         #resultado {
-            margin: 20px auto;
-            max-width: 90%;
+            margin-top: 20px;
+            overflow-x: auto;
         }
 
         table {
@@ -35,143 +52,53 @@
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
-        }
-
-        /* Cabeçalho da Tabela */
-        th {
-            background-color: rgb(9, 41, 82); /* Cor de fundo do cabeçalho */
-            color: white; /* Cor da fonte do cabeçalho */
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        /* Corpo da Tabela */
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tbody tr:hover {
-            background-color: #ddd;
-        }
-
-        /* Estilo para os campos de busca */
-        label, input, button {
-            display: block;
-            margin: 10px auto;
-            text-align: center;
-            max-width: 300px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Adicionando rolagem à tabela */
-        #tabela-resultados-container {
-            max-height: 300px; /* Defina a altura desejada */
-            overflow-y: auto; /* Adiciona a barra de rolagem vertical */
-            background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid #ddd;
         }
 
-        /* Estilo para as células dos resultados */
-        td {
-            background-color: white;
-            color: black; /* Cor da fonte dos dados da tabela */
-        }
-
-        input[type="text"] {
-            padding: 8px;
-            width: 100%;
-            font-size: 16px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        /* Adicionando espaçamento entre campos */
-        div {
-            margin-bottom: 10px;
-        }
-
-        /* Estilo para o botão de impressão */
-        #btn-imprimir {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #btn-imprimir:hover {
-            background-color: #218838;
-        }
-
-        /* Rodapé */
-        footer {
+        th {
             background-color: rgb(9, 41, 82);
             color: white;
-            text-align: center;
-            padding: 10px;
-            position: relative;
-            bottom: 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
             width: 100%;
-            margin-top: auto;
+            text-align: center;
+            font-size: 10px;
+            color: #000;
         }
 
-        footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Regras de impressão */
         @media print {
-            /* Ocultar cabeçalho na primeira página */
+            /* Estilo para impressão */
             thead {
                 display: table-header-group;
             }
 
-            /* Quebra de página antes do cabeçalho nas páginas subsequentes */
-            thead {
-                display: table-header-group;
+            /* Ajuste para não repetir o cabeçalho nas páginas subsequentes */
+            thead, tr:first-child {
+                page-break-before: always;
             }
 
-            tr:first-child th {
-                display: none; /* Esconde o cabeçalho da primeira página */
-            }
-
-            /* A cada nova página, o cabeçalho aparecerá novamente */
-            tr:nth-child(n+2) th {
-                display: table-header-group; /* Exibe o cabeçalho nas páginas subsequentes */
-            }
-
-            footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                background-color: rgb(9, 41, 82);
-                color: white;
-                text-align: center;
-                padding: 5px;
+            /* Personalização para a impressão */
+            body {
                 font-size: 12px;
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 10px;
+                width: 100%;
+                text-align: center;
+                font-size: 10px;
+                color: #000;
+            }
+
+            /* Esconder o botão de buscar na impressão */
+            button {
+                display: none;
             }
         }
     </style>
@@ -187,90 +114,30 @@
         <input type="text" id="lote" placeholder="Digite o lote">
     </div>
     <button onclick="buscar()">Buscar</button>
-
-    <!-- Botão de impressão -->
-    <button id="btn-imprimir" onclick="imprimir()">Imprimir Relatório</button>
+    <button onclick="window.print()">Imprimir</button>
 
     <div id="resultado">
         <h2>Resultado:</h2>
-        <div id="tabela-resultados-container">
-            <table id="tabela-resultados">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Lote Produto Acabado</th>
-                        <th>Data de Fabricação</th>
-                        <th>Lote Matéria Prima</th>
-                        <th>Descrição do Produto</th>
-                        <th>Fornecedor</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+        <table id="tabela-resultados">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Lote Produto Acabado</th>
+                    <th>Data de Fabricação</th>
+                    <th>Lote Matéria Prima</th>
+                    <th>Descrição do Produto</th>
+                    <th>Fornecedor</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
-    <!-- Rodapé da Página -->
-    <footer>
-        <p>Fale com a Holambra | (14) 3769-9500 | Contato@holambra.com.br</p>
-        <p>Rodovia Raposo Tavares, km 256, Campos de Holambra - Paranapanema/SP</p>
-        <p>&copy; 2024 Cooperativa Agroindustrial Holambra. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-        // Função de busca (mantida para fins de exibição da tabela)
-        function buscar() {
-            const produto = document.getElementById('produto').value;
-            const lote = document.getElementById('lote').value;
-            const resultadoTabela = document.getElementById('tabela-resultados').getElementsByTagName('tbody')[0];
-
-            // Limpar resultados antes de adicionar novos
-            resultadoTabela.innerHTML = '';
-
-            // Aqui você pode adicionar sua lógica para buscar os dados no CSV e preencher a tabela
-            // Por exemplo, simulação de dados para fins de demonstração:
-            const dados = [
-                ['Produto A', 'Lote123', '01/01/2024', 'MP001', 'Descrição do Produto A', 'Fornecedor X'],
-                ['Produto B', 'Lote456', '02/02/2024', 'MP002', 'Descrição do Produto B', 'Fornecedor Y']
-            ];
-
-            dados.forEach(item => {
-                const tr = document.createElement('tr');
-                item.forEach(celula => {
-                    const td = document.createElement('td');
-                    td.textContent = celula;
-                    tr.appendChild(td);
-                });
-                resultadoTabela.appendChild(tr);
-            });
-        }
-
-        // Função de impressão
-        function imprimir() {
-            const conteudoTabela = document.getElementById('tabela-resultados').innerHTML; // Pega apenas a tabela
-            const conteudoCabecalho = document.getElementById('tabela-resultados').getElementsByTagName('thead')[0].outerHTML; // Pega apenas o cabeçalho da tabela
-            const conteudo = `
-                <div style="text-align: center; font-size: 20px;">
-                    <h2>Relatório de Rastreabilidade</h2>
-                    <p>Data da Impressão: ${new Date().toLocaleString()}</p>
-                </div>
-                <table style="width: 100%; border: 1px solid #ddd; border-collapse: collapse;">
-                    ${conteudoCabecalho}
-                    <tbody>
-                        ${conteudoTabela}
-                    </tbody>
-                </table>
-            `;
-
-            // Abrir a janela de impressão
-            const janelaImpressao = window.open('', '', 'height=600,width=800');
-            janelaImpressao.document.write('<html><head><title>Imprimir Relatório</title>');
-            janelaImpressao.document.write('</head><body>');
-            janelaImpressao.document.write(conteudo);
-            janelaImpressao.document.write('</body></html>');
-            janelaImpressao.document.close();
-            janelaImpressao.print();
-        }
-    </script>
+    <div class="footer">
+        <p>FALE COM A HOLAMBRA</p>
+        <p>(14) 3769-9500</p>
+        <p>Contato@holambra.com.br</p>
+        <p>Rodovia Raposo Tavares, km 256 | Campos de Holambra - Paranapanema/SP</p>
+    </div>
 </body>
 </html>
